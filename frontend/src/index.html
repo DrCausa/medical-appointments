@@ -1,15 +1,145 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Medical Appointments</title>
-  </head>
-  <body>
-    <!-- container -->
-    <span class="material-symbols-outlined">home</span>
+<!DOCTYPE html>
+<html lang="es" x-data="{ openAgendar:false, openListar:false, openCancelar:false, selectedCita:null }">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citas Médicas - Sistema</title>
+</head>
+<body class="bg-gray-100 min-h-screen flex">
 
-    <script type="module" src="./js/main.js"></script>
-  </body>
+  <!-- Sidebar -->
+  <aside class="w-64 bg-blue-600 text-white flex flex-col">
+    <div class="p-6 text-2xl font-bold flex items-center">
+      <span class="material-symbols-outlined mr-2">local_hospital</span>Sistema Médico
+    </div>
+    <nav class="flex-1 px-4 space-y-3">
+      <a href="#" class="flex items-center px-3 py-2 rounded-lg bg-blue-700"><span class="material-symbols-outlined mr-2">event</span>Citas</a>
+      <a href="#" class="flex items-center px-3 py-2 rounded-lg hover:bg-blue-700"><span class="material-symbols-outlined mr-2">person</span>Perfil</a>
+      <a href="#" class="flex items-center px-3 py-2 rounded-lg hover:bg-blue-700"><span class="material-symbols-outlined mr-2">help</span>Ayuda</a>
+    </nav>
+    <div class="p-4">
+      <a href="login.html" class="w-full flex items-center justify-center bg-red-500 py-2 rounded-lg hover:bg-red-600">
+        <span class="material-symbols-outlined mr-2">logout</span>Cerrar sesión
+      </a>
+    </div>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="flex-1 p-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-2">Bienvenido, <span class="text-blue-600">Paciente</span></h1>
+    <p class="text-gray-600 mb-6">Desde aquí puedes gestionar tus citas médicas y consultar tu información.</p>
+
+    <!-- Opciones de citas -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <!-- Agendar -->
+      <div class="bg-white p-6 rounded-2xl shadow flex flex-col items-center text-center hover:shadow-lg transition">
+        <span class="material-symbols-outlined text-blue-600 text-5xl mb-4">add_circle</span>
+        <h2 class="text-xl font-semibold text-gray-700 mb-2">Agendar Cita</h2>
+        <p class="text-gray-500 mb-4">Programa una nueva cita médica fácilmente.</p>
+        <button @click="openAgendar = true" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Agendar</button>
+      </div>
+      <!-- Listar -->
+      <div class="bg-white p-6 rounded-2xl shadow flex flex-col items-center text-center hover:shadow-lg transition">
+        <span class="material-symbols-outlined text-green-600 text-5xl mb-4">list_alt</span>
+        <h2 class="text-xl font-semibold text-gray-700 mb-2">Listar Citas</h2>
+        <p class="text-gray-500 mb-4">Consulta tus citas médicas programadas.</p>
+        <button @click="openListar = true" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Listar</button>
+      </div>
+      <!-- Cancelar -->
+      <div class="bg-white p-6 rounded-2xl shadow flex flex-col items-center text-center hover:shadow-lg transition">
+        <span class="material-symbols-outlined text-red-600 text-5xl mb-4">cancel</span>
+        <h2 class="text-xl font-semibold text-gray-700 mb-2">Cancelar Cita</h2>
+        <p class="text-gray-500 mb-4">Anula una cita médica previamente agendada.</p>
+        <button @click="openCancelar = true" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">Cancelar</button>
+      </div>
+    </div>
+
+    <!-- Avisos -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+        <span class="material-symbols-outlined text-yellow-500 mr-2">campaign</span>Avisos importantes
+      </h2>
+      <div class="bg-white p-6 rounded-2xl shadow space-y-3">
+        <p class="text-gray-700">📌 Recuerda llegar 15 minutos antes de tu cita médica.</p>
+        <p class="text-gray-700">📌 Llevar DNI y carnet de seguro.</p>
+        <p class="text-gray-700">📌 El uso de mascarilla dentro del centro médico es obligatorio.</p>
+      </div>
+    </section>
+
+    <!-- Historial -->
+    <section>
+      <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+        <span class="material-symbols-outlined text-purple-500 mr-2">history</span>Últimas atenciones
+      </h2>
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="border-b text-gray-600">
+              <th class="py-2">Fecha</th><th class="py-2">Especialidad</th><th class="py-2">Médico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b"><td class="py-2">20 Ago 2025</td><td class="py-2">Medicina General</td><td class="py-2">Dr. Juan Pérez</td></tr>
+            <tr class="border-b"><td class="py-2">05 Jul 2025</td><td class="py-2">Odontología</td><td class="py-2">Dra. María Torres</td></tr>
+            <tr><td class="py-2">15 Jun 2025</td><td class="py-2">Pediatría</td><td class="py-2">Dr. Luis Gómez</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Agendar -->
+  <div x-show="openAgendar" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-transition>
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-lg p-6 relative">
+      <button @click="openAgendar = false" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"><span class="material-symbols-outlined">close</span></button>
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Agendar nueva cita</h2>
+      <form class="space-y-4">
+        <div><label class="block text-gray-600">Fecha</label><input type="date" class="w-full p-2 border rounded-lg"></div>
+        <div><label class="block text-gray-600">Hora</label><input type="time" class="w-full p-2 border rounded-lg"></div>
+        <div><label class="block text-gray-600">Especialidad</label><select class="w-full p-2 border rounded-lg"><option>Medicina General</option><option>Pediatría</option><option>Cardiología</option></select></div>
+        <div><label class="block text-gray-600">Médico</label><input type="text" class="w-full p-2 border rounded-lg" placeholder="Nombre del médico"></div>
+        <div class="flex justify-end space-x-3"><button type="button" @click="openAgendar=false" class="px-4 py-2 bg-gray-300 rounded-lg">Cerrar</button><button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Guardar</button></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Listar -->
+  <div x-show="openListar" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-transition>
+    <div class="bg-white w-full max-w-3xl rounded-2xl shadow-lg p-6 relative">
+      <button @click="openListar = false" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"><span class="material-symbols-outlined">close</span></button>
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Tus citas programadas</h2>
+      <table class="w-full border-collapse">
+        <thead><tr class="bg-gray-100 text-gray-600"><th class="p-3">Fecha</th><th class="p-3">Hora</th><th class="p-3">Especialidad</th><th class="p-3">Médico</th></tr></thead>
+        <tbody>
+          <tr class="border-b hover:bg-gray-50"><td class="p-3">10 Sep 2025</td><td class="p-3">10:30 AM</td><td class="p-3">Cardiología</td><td class="p-3">Dr. Juan Pérez</td></tr>
+          <tr class="border-b hover:bg-gray-50"><td class="p-3">22 Ago 2025</td><td class="p-3">03:00 PM</td><td class="p-3">Odontología</td><td class="p-3">Dra. María Torres</td></tr>
+          <tr class="hover:bg-gray-50"><td class="p-3">05 Ago 2025</td><td class="p-3">09:00 AM</td><td class="p-3">Medicina General</td><td class="p-3">Dr. Luis Gómez</td></tr>
+        </tbody>
+      </table>
+      <div class="flex justify-end mt-6"><button @click="openListar = false" class="px-4 py-2 bg-gray-300 rounded-lg">Cerrar</button></div>
+    </div>
+  </div>
+
+  <!-- Modal Cancelar -->
+  <div x-show="openCancelar" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-transition>
+    <div class="bg-white w-full max-w-3xl rounded-2xl shadow-lg p-6 relative">
+      <button @click="openCancelar = false" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"><span class="material-symbols-outlined">close</span></button>
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Cancelar cita</h2>
+      <table class="w-full border-collapse">
+        <thead><tr class="bg-gray-100 text-gray-600"><th class="p-3">Seleccionar</th><th class="p-3">Fecha</th><th class="p-3">Hora</th><th class="p-3">Especialidad</th><th class="p-3">Médico</th></tr></thead>
+        <tbody>
+          <tr class="border-b hover:bg-gray-50"><td class="p-3"><input type="radio" name="cita" value="1" x-model="selectedCita"></td><td class="p-3">10 Sep 2025</td><td class="p-3">10:30 AM</td><td class="p-3">Cardiología</td><td class="p-3">Dr. Juan Pérez</td></tr>
+          <tr class="border-b hover:bg-gray-50"><td class="p-3"><input type="radio" name="cita" value="2" x-model="selectedCita"></td><td class="p-3">22 Ago 2025</td><td class="p-3">03:00 PM</td><td class="p-3">Odontología</td><td class="p-3">Dra. María Torres</td></tr>
+          <tr class="hover:bg-gray-50"><td class="p-3"><input type="radio" name="cita" value="3" x-model="selectedCita"></td><td class="p-3">05 Ago 2025</td><td class="p-3">09:00 AM</td><td class="p-3">Medicina General</td><td class="p-3">Dr. Luis Gómez</td></tr>
+        </tbody>
+      </table>
+      <div class="flex justify-end mt-6 space-x-3">
+        <button @click="openCancelar = false" class="px-4 py-2 bg-gray-300 rounded-lg">Cerrar</button>
+        <button @click="if(selectedCita){ alert('❌ Cita cancelada exitosamente'); openCancelar=false; selectedCita=null } else { alert('⚠️ Selecciona una cita primero'); }" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Cancelar Cita</button>
+      </div>
+    </div>
+  </div>
+<script type="module" src="./js/main.js"></script>
+</body>
 </html>
+
