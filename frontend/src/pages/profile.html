@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es" x-data="{openPassword:false, openNotifications:false, openDelete:false}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil - Configuración de Cuenta</title>
+</head>
+<body class="bg-gray-100 min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-blue-600 text-white flex flex-col">
+    <div class="p-6 text-2xl font-bold flex items-center">
+      <span class="material-symbols-outlined mr-2">local_hospital</span>Sistema Médico
+    </div>
+    <nav class="flex-1 px-4 space-y-3">
+      <a href="../index.html" class="flex items-center px-3 py-2 rounded-lg hover:bg-blue-700"><span class="material-symbols-outlined mr-2">event</span>Citas</a>
+      <a href="profile.html" class="flex items-center px-3 py-2 rounded-lg bg-blue-700"><span class="material-symbols-outlined mr-2">person</span>Perfil</a>
+      <a href="#" class="flex items-center px-3 py-2 rounded-lg hover:bg-blue-700"><span class="material-symbols-outlined mr-2">help</span>Ayuda</a>
+    </nav>
+    <div class="p-4">
+      <a href="login.html" class="w-full flex items-center justify-center bg-red-500 py-2 rounded-lg hover:bg-red-600">
+        <span class="material-symbols-outlined mr-2">logout</span>Cerrar sesión
+      </a>
+    </div>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="flex-1 p-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Configuración de cuenta</h1>
+
+    <!-- Sección de Configuración -->
+    <section class="bg-white rounded-2xl shadow p-6 mb-8">
+      <h2 class="text-xl font-semibold text-gray-700 mb-4">Opciones</h2>
+      <div class="flex flex-col space-y-4">
+        <!-- Cambiar contraseña -->
+        <button @click="openPassword = true" class="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
+          <span class="flex items-center text-gray-700">
+            <span class="material-symbols-outlined mr-2 text-blue-600">lock</span>
+            Cambiar contraseña
+          </span>
+          <span class="material-symbols-outlined text-gray-400">chevron_right</span>
+        </button>
+        <!-- Preferencias de notificación -->
+        <button @click="openNotifications = true" class="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
+          <span class="flex items-center text-gray-700">
+            <span class="material-symbols-outlined mr-2 text-green-600">notifications</span>
+            Preferencias de notificación
+          </span>
+          <span class="material-symbols-outlined text-gray-400">chevron_right</span>
+        </button>
+        <!-- Eliminar cuenta -->
+        <button @click="openDelete = true" class="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
+          <span class="flex items-center text-gray-700">
+            <span class="material-symbols-outlined mr-2 text-red-600">delete</span>
+            Eliminar cuenta
+          </span>
+          <span class="material-symbols-outlined text-gray-400">chevron_right</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Cambiar Contraseña -->
+  <div x-show="openPassword" class="fixed inset-0 bg-black/20 bg-opacity-50 flex items-center justify-center z-50" x-transition>
+    <div class="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative">
+      <button @click="openPassword = false" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Cambiar contraseña</h2>
+      <form class="space-y-4">
+        <div>
+          <label class="block text-gray-600">Contraseña actual</label>
+          <input type="password" class="w-full p-2 border rounded-lg" placeholder="•••••••">
+        </div>
+        <div>
+          <label class="block text-gray-600">Nueva contraseña</label>
+          <input type="password" class="w-full p-2 border rounded-lg" placeholder="•••••••">
+        </div>
+        <div>
+          <label class="block text-gray-600">Confirmar nueva contraseña</label>
+          <input type="password" class="w-full p-2 border rounded-lg" placeholder="•••••••">
+        </div>
+        <div class="flex justify-end space-x-3">
+          <button type="button" @click="openPassword = false" class="px-4 py-2 bg-gray-300 rounded-lg">Cancelar</button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Preferencias de Notificación -->
+  <div x-show="openNotifications" class="fixed inset-0 bg-black/20 bg-opacity-50 flex items-center justify-center z-50" x-transition>
+    <div class="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative">
+      <button @click="openNotifications = false" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Preferencias de notificación</h2>
+      <form class="space-y-4">
+        <label class="flex items-center space-x-2">
+          <input type="checkbox" class="h-5 w-5 text-blue-600"> <span>Email</span>
+        </label>
+        <label class="flex items-center space-x-2">
+          <input type="checkbox" class="h-5 w-5 text-blue-600"> <span>SMS</span>
+        </label>
+        <label class="flex items-center space-x-2">
+          <input type="checkbox" class="h-5 w-5 text-blue-600"> <span>Notificaciones push</span>
+        </label>
+        <div class="flex justify-end space-x-3">
+          <button type="button" @click="openNotifications = false" class="px-4 py-2 bg-gray-300 rounded-lg">Cerrar</button>
+          <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Eliminar Cuenta -->
+  <div x-show="openDelete" class="fixed inset-0 bg-black/20 bg-opacity-50 flex items-center justify-center z-50" x-transition>
+    <div class="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative">
+      <button @click="openDelete = false" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <h2 class="text-xl font-bold text-red-600 mb-4">¿Eliminar cuenta?</h2>
+      <p class="text-gray-600 mb-6">Esta acción no se puede deshacer. Se eliminarán tus datos y citas asociadas.</p>
+      <div class="flex justify-end space-x-3">
+        <button @click="openDelete = false" class="px-4 py-2 bg-gray-300 rounded-lg">Cancelar</button>
+        <button @click="alert('❌ Cuenta eliminada')" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Eliminar</button>
+      </div>
+    </div>
+  </div>
+<script type="module" src=".././js/main.js"></script>
+</body>
+</html>
+
