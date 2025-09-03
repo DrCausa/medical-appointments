@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayuda - Centro de Soporte</title>
+</head>
+<body class="bg-gray-100 min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-blue-600 text-white flex flex-col">
+    <div class="p-6 text-2xl font-bold flex items-center">
+      <span class="material-symbols-outlined mr-2">local_hospital</span>Sistema Médico
+    </div>
+    <nav class="flex-1 px-4 space-y-3">
+      <a href="#" class="flex items-center px-3 py-2 rounded-lg hover:bg-blue-700"><span class="material-symbols-outlined mr-2">event</span>Citas</a>
+      <a href="#" class="flex items-center px-3 py-2 rounded-lg hover:bg-blue-700"><span class="material-symbols-outlined mr-2">person</span>Perfil</a>
+      <a href="#" class="flex items-center px-3 py-2 rounded-lg bg-blue-700"><span class="material-symbols-outlined mr-2">help</span>Ayuda</a>
+    </nav>
+    <div class="p-4">
+      <a href="login.html" class="w-full flex items-center justify-center bg-red-500 py-2 rounded-lg hover:bg-red-600">
+        <span class="material-symbols-outlined mr-2">logout</span>Cerrar sesión
+      </a>
+    </div>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="flex-1 p-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Centro de Ayuda</h1>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-8">
+      <h2 class="text-xl font-semibold text-gray-700 mb-4">Preguntas Frecuentes</h2>
+      <div class="space-y-4 text-gray-700">
+        <div>
+          <p class="font-semibold">📌 ¿Cómo agendar una cita?</p>
+          <p class="text-gray-600">Ve a la sección <b>Citas</b> y haz clic en <b>Agendar</b>.</p>
+        </div>
+        <div>
+          <p class="font-semibold">📌 ¿Cómo cambiar mi contraseña?</p>
+          <p class="text-gray-600">Entra en <b>Perfil → Configuración</b> y selecciona <b>Cambiar contraseña</b>.</p>
+        </div>
+        <div>
+          <p class="font-semibold">📌 ¿Cómo recibir notificaciones?</p>
+          <p class="text-gray-600">Entra en <b>Perfil → Configuración</b> y ajusta las <b>Preferencias de notificación</b>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6">
+      <h2 class="text-xl font-semibold text-gray-700 mb-4">Contacto</h2>
+      <p class="text-gray-700">Si necesitas más ayuda, puedes contactarnos:</p>
+      <ul class="mt-3 space-y-2 text-gray-700">
+        <li>📧 Email: <a href="mailto:soporte@clinica.com" class="text-blue-600 hover:underline">soporte@clinica.com</a></li>
+        <li>📞 Teléfono: (01) 234-5678</li>
+        <li>🌐 Sitio web: <a href="https://www.clinica.com" class="text-blue-600 hover:underline" target="_blank">www.clinica.com</a></li>
+      </ul>
+    </section>
+  </main>
+<script type="module" src=".././js/main.js"></script>
+</body>
+</html>
