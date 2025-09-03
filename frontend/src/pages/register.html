@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" x-data="{ 
+    showPassword: false, 
+    showConfirm: false,
+    password: '', 
+    confirmPassword: '', 
+    error: '', 
+    success: '' 
+}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro - Pacientes</title>
+  
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Alpine.js -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+  <!-- Google Fonts Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-200">
+  
+  <!-- Contenedor principal -->
+  <div class="bg-white shadow-2xl rounded-2xl flex overflow-hidden w-[900px] max-w-full">
+    
+    <!-- Lado izquierdo -->
+    <div class="hidden md:flex flex-col justify-center items-center bg-blue-600 text-white w-1/2 p-8">
+      <span class="material-symbols-outlined text-6xl mb-4">how_to_reg</span>
+      <h2 class="text-3xl font-bold mb-2">Registro de Pacientes</h2>
+      <p class="text-center text-blue-100">Crea tu cuenta para acceder a citas médicas y tu historial clínico en línea.</p>
+    </div>
+
+    <!-- Lado derecho -->
+    <div class="w-full md:w-1/2 p-10">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Crear Cuenta</h2>
+
+      <!-- Mensajes de error o éxito -->
+      <template x-if="error">
+        <div class="mb-4 bg-red-100 text-red-700 px-4 py-2 rounded-lg text-sm" x-text="error"></div>
+      </template>
+      <template x-if="success">
+        <div class="mb-4 bg-green-100 text-green-700 px-4 py-2 rounded-lg text-sm" x-text="success"></div>
+      </template>
+
+      <!-- Formulario -->
+      <form @submit.prevent="
+          error = '';
+          success = '';
+          if(password !== confirmPassword){
+            error = '❌ Las contraseñas no coinciden';
+          } else {
+            success = '✅ Registro exitoso (simulado)';
+          }
+        " 
+        class="space-y-5">
+        
+        <!-- Nombre -->
+        <div>
+          <label class="block text-gray-700 mb-1">Nombre completo</label>
+          <div class="flex items-center border rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-blue-400">
+            <span class="material-symbols-outlined text-gray-400 mr-2">person</span>
+            <input type="text" placeholder="Tu nombre" required
+                   class="w-full focus:outline-none">
+          </div>
+        </div>
+
+        <!-- Correo -->
+        <div>
+          <label class="block text-gray-700 mb-1">Correo electrónico</label>
+          <div class="flex items-center border rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-blue-400">
+            <span class="material-symbols-outlined text-gray-400 mr-2">mail</span>
+            <input type="email" placeholder="ejemplo@correo.com" required
+                   class="w-full focus:outline-none">
+          </div>
+        </div>
+
+        <!-- Contraseña -->
+        <div>
+          <label class="block text-gray-700 mb-1">Contraseña</label>
+          <div class="flex items-center border rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-blue-400">
+            <span class="material-symbols-outlined text-gray-400 mr-2">lock</span>
+            <input :type="showPassword ? 'text' : 'password'" placeholder="••••••••" required
+                   x-model="password"
+                   class="w-full focus:outline-none">
+            <button type="button" @click="showPassword = !showPassword" class="ml-2 focus:outline-none">
+              <span class="material-symbols-outlined text-gray-400">
+                <template x-if="!showPassword">visibility</template>
+                <template x-if="showPassword">visibility_off</template>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Confirmar contraseña -->
+        <div>
+          <label class="block text-gray-700 mb-1">Confirmar contraseña</label>
+          <div class="flex items-center border rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-blue-400">
+            <span class="material-symbols-outlined text-gray-400 mr-2">lock_reset</span>
+            <input :type="showConfirm ? 'text' : 'password'" placeholder="••••••••" required
+                   x-model="confirmPassword"
+                   class="w-full focus:outline-none">
+            <button type="button" @click="showConfirm = !showConfirm" class="ml-2 focus:outline-none">
+              <span class="material-symbols-outlined text-gray-400">
+                <template x-if="!showConfirm">visibility</template>
+                <template x-if="showConfirm">visibility_off</template>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Botón -->
+        <button type="submit"
+                class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg shadow hover:bg-blue-700 transition">
+          Registrarme
+        </button>
+      </form>
+
+      <!-- Link a login -->
+      <p class="text-sm text-gray-600 text-center mt-6">
+        ¿Ya tienes una cuenta?
+        <a href="login.html" class="text-blue-600 hover:underline">Inicia sesión aquí</a>
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
