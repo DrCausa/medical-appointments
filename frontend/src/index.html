@@ -89,7 +89,7 @@
   </main>
 
   <!-- Modal Agendar -->
-  <div x-show="openAgendar" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-transition>
+  <div x-show="openAgendar" class="fixed inset-0 flex items-center justify-center bg-black/20 bg-opacity-50 z-50" x-transition>
     <div class="bg-white w-full max-w-lg rounded-2xl shadow-lg p-6 relative">
       <button @click="openAgendar = false" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"><span class="material-symbols-outlined">close</span></button>
       <h2 class="text-2xl font-bold text-gray-800 mb-4">Agendar nueva cita</h2>
@@ -104,7 +104,7 @@
   </div>
 
   <!-- Modal Listar -->
-  <div x-show="openListar" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-transition>
+  <div x-show="openListar" class="fixed inset-0 flex items-center justify-center bg-black/20 bg-opacity-50 z-50" x-transition>
     <div class="bg-white w-full max-w-3xl rounded-2xl shadow-lg p-6 relative">
       <button @click="openListar = false" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"><span class="material-symbols-outlined">close</span></button>
       <h2 class="text-2xl font-bold text-gray-800 mb-4">Tus citas programadas</h2>
@@ -121,7 +121,7 @@
   </div>
 
   <!-- Modal Cancelar -->
-  <div x-show="openCancelar" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-transition>
+  <div x-show="openCancelar" class="fixed inset-0 flex items-center justify-center bg-black/20 bg-opacity-50 z-50" x-transition>
     <div class="bg-white w-full max-w-3xl rounded-2xl shadow-lg p-6 relative">
       <button @click="openCancelar = false" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"><span class="material-symbols-outlined">close</span></button>
       <h2 class="text-2xl font-bold text-gray-800 mb-4">Cancelar cita</h2>
