@@ -36,3 +36,14 @@ export async function eliminarUsuario(id) {
   const data = await res.json();
   console.log(data);
 }
+
+export async function loginUsuario(email, contra) {
+  const res = await fetch('http://localhost:4000/api/usuarios/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, contra })
+  });
+
+  const data = await res.json();
+  return data.body || null;
+}

@@ -58,4 +58,20 @@ async function eliminar(req, res, next) {
 //     respuesta.success(req, res, items, 200)
 // });
 
+router.post('/login', async (req, res, next) => {
+  try {
+    const { email, contra } = req.body;
+    const usuarios = await controlador.todos(); // o crear un método específico login
+    const usuario = usuarios.find(u => u.email === email && u.contra === contra);
+
+    if (usuario) {
+      respuesta.success(req, res, usuario, 200);
+    } else {
+      respuesta.success(req, res, null, 200); // null indica credenciales incorrectas
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
