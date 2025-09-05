@@ -1,4 +1,5 @@
 import '../css/main.css';
+import './register.js'
 
 import Alpine from 'alpinejs'
  
